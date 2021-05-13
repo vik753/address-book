@@ -1,0 +1,25 @@
+.footer {
+  flex: 0 0 auto;
+  background: #23707d;
+  color: #fff;
+  padding: 1rem;
+
+  .footer_links {
+    margin: 0 auto;
+    padding: 0.5rem;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s ease;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
