@@ -9,8 +9,8 @@ export const Header = () => {
                     <Link to={'/'} className="link">
                         Home
                     </Link>
-                    <Link className="link">About</Link>
-                    <Link className="link">Contacts</Link>
+                    <Link to={'/'} className="link">About</Link>
+                    <Link to={'/'}  className="link">Contacts</Link>
                 </div>
             </div>
         </div>
