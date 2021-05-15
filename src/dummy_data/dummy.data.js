@@ -1,6 +1,6 @@
 export const dummyData = [
     {
-        id: 0,
+        id: "0dadsf-asdf",
         first_name: 'John',
         last_name: 'Dow',
         phones: {
@@ -9,7 +9,7 @@ export const dummyData = [
         },
     },
     {
-        id: 1,
+        id: "1asdfa-asdfads",
         first_name: 'Dan',
         last_name: 'Brown',
         phones: {
@@ -17,7 +17,7 @@ export const dummyData = [
         },
     },
     {
-        id: 2,
+        id: "2asdf-asdf",
         first_name: 'Milla',
         last_name: 'Jovovich',
         phones: {
@@ -25,7 +25,7 @@ export const dummyData = [
         },
     },
     {
-        id: 3,
+        id: "3asdfas-asdf",
         first_name: 'Bruce',
         last_name: 'Willis',
         phones: {

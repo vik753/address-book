@@ -1,0 +1,75 @@
+.edit-wrapper {
+  margin: 0 auto;
+  width: 450px;
+  text-align: center;
+
+  .user-data {
+    width: 100%;
+    position: relative;
+
+    .add-phone {
+      background: url("../../assets/img/add_circle_outline_black_24dp.svg") no-repeat center center;
+      background-size: 100%;
+      stroke-width: 2px;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      right: -50px;
+      bottom: 0;
+      cursor: pointer;
+      transition: 0.2s ease;
+
+      &:hover {
+        transform: rotate(90deg);
+      }
+    }
+
+    .remove-phone {
+      background: url("../../assets/img/delete_black_24dp.svg") no-repeat center center;
+      background-size: 100%;
+      stroke-width: 2px;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      right: -90px;
+      bottom: 0;
+      cursor: pointer;
+      transition: 0.2s ease;
+
+      &:hover {
+        transform: rotate(15deg);
+      }
+
+      &[disabled] {
+        opacity: 0.5;
+
+        &:hover {
+          transform: none;
+        }
+      }
+    }
+
+    .user-data_row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+
+      input {
+        width: 70%;
+        padding: 0.5rem;
+      }
+
+      &.phone-row {
+        select {
+          padding: 0.5rem;
+        }
+        input {
+          width: 219px;
+          margin-left: 12px;
+        }
+      }
+    }
+  }
+}
