@@ -21,9 +21,9 @@ export const HomePage = () => {
             const confirmation = window.confirm('Do you really want to delete this contact?');
             if (!confirmation) return;
             const removeId = e.target.dataset.id;
+            console.log(e.target.dataset.id)
             if (!removeId) return;
             const newState = users.filter((user) => user.id !== removeId);
-            console.log(newState, user.id, removeId);
             setUsers(newState);
         };
 
@@ -45,6 +45,7 @@ export const HomePage = () => {
                             onClick={removeClickHandler}
                         >
                             <svg
+                                data-id={user.id}
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
                                 fill="tomato"

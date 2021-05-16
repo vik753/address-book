@@ -11,7 +11,7 @@ import {StateContext} from "./stateContext/stateContext";
 
 
 const App = () => {
-    const [users, setUsers] = useState(JSON.parse(window.localStorage.getItem('address_contacts')) || dummyData);
+    const [users, setUsers] = useState(dummyData);
 
     return (
         <StateContext.Provider value={{ users, setUsers }}>

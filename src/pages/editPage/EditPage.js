@@ -1,10 +1,9 @@
 import validator from 'validator';
-import { useParams } from 'react-router-dom';
-import { useContext, useEffect, useRef, useState } from 'react';
-import { StateContext } from '../../stateContext/stateContext';
-import { useHistory } from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
+import {useContext, useEffect, useRef, useState} from 'react';
+import {StateContext} from '../../stateContext/stateContext';
 import './editPage.scss';
-import { v4 as uuid_v4 } from 'uuid';
+import {v4 as uuid_v4} from 'uuid';
 import _ from 'lodash';
 
 export const EditPage = () => {
@@ -12,6 +11,7 @@ export const EditPage = () => {
     let history = useHistory();
     const userDataEl = useRef(null);
     const removeIco = useRef(null);
+    const removeIcoSvg = useRef(null);
     const { users, setUsers } = useContext(StateContext);
     const [currentUser, setCurrentUser] = useState(null);
     const [numPhones, setNumPhones] = useState(0);
@@ -149,14 +149,12 @@ export const EditPage = () => {
 
         if (users.find((user) => user.id === currentUser.id)) {
             setUsers((prevState) => {
-                const newState = prevState.map((user) => {
+                return prevState.map((user) => {
                     if (user.id === currentUser.id) {
                         return currentUser;
                     }
                     return user;
                 });
-                window.localStorage.setItem('address_contacts', JSON.stringify(newState));
-                return newState;
             });
         } else {
             setUsers((prevState) => [...prevState, currentUser]);
@@ -166,8 +164,9 @@ export const EditPage = () => {
     };
 
     const getPhoneRow = (phoneKey) => {
-        if (removeIco.current) {
+        if (removeIco.current && removeIcoSvg.current) {
             removeIco.current.setAttribute('data-id', phoneKey);
+            removeIcoSvg.current.setAttribute('data-id', phoneKey);
         }
         return (
             <div
@@ -220,7 +219,7 @@ export const EditPage = () => {
                     disabled={numPhones === 1}
                     ref={removeIco}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="tomato">
+                    <svg  ref={removeIcoSvg} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="tomato">
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z" />
                     </svg>
