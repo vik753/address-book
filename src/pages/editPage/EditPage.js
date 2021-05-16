@@ -207,14 +207,24 @@ export const EditPage = () => {
         <div className="edit-wrapper">
             <h1>Edit Contact</h1>
             <div className="user-data" ref={userDataEl}>
-                <div className="add-phone" title="Add new phone" onClick={addPhoneHandler} />
+                <div className="add-phone" title="Add new phone" onClick={addPhoneHandler}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7eba8b">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                    </svg>
+                </div>
                 <div
                     className="remove-phone"
                     title="Remove phone"
                     onClick={removePhoneHandler}
                     disabled={numPhones === 1}
                     ref={removeIco}
-                />
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="tomato">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z" />
+                    </svg>
+                </div>
                 <div className="user-data_row">
                     <label htmlFor="first_name">First Name:*</label>
                     <input
