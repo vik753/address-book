@@ -4,8 +4,8 @@ export const dummyData = [
         first_name: 'John',
         last_name: 'Dow',
         phones: {
-            '+380503332233': { number: '+380503332233', description: 'mobile' },
-            '+0482175665': { number: '+0482175665', description: 'work' },
+            'aaa-001': { number: '+380503332233', description: 'mobile' },
+            'aaa-002': { number: '+0482175665', description: 'work' },
         },
     },
     {
@@ -13,7 +13,7 @@ export const dummyData = [
         first_name: 'Dan',
         last_name: 'Brown',
         phones: {
-            '+380675233322': { number: '+380675233322', description: 'mobile' },
+            'aaa-003': { number: '+380675233322', description: 'mobile' },
         },
     },
     {
@@ -21,7 +21,7 @@ export const dummyData = [
         first_name: 'Milla',
         last_name: 'Jovovich',
         phones: {
-            '+380663515151': { number: '+380663515151', description: 'home' },
+            'aaa-004': { number: '+380663515151', description: 'home' },
         },
     },
     {
@@ -29,10 +29,10 @@ export const dummyData = [
         first_name: 'Bruce',
         last_name: 'Willis',
         phones: {
-            '+380995890509': { number: '+380995890509', description: 'mobile' },
-            '+380995890508': { number: '+380995890508', description: 'home' },
-            '+380995890507': { number: '+380995890507', description: 'work' },
-            '+380995890506': { number: '+380995890506', description: 'car' },
+            'aaa-005': { number: '+380995890509', description: 'mobile' },
+            'aaa-006': { number: '+380995890508', description: 'home' },
+            'aaa-007': { number: '+380995890507', description: 'work' },
+            'aaa-008': { number: '+380995890506', description: 'car' },
         },
     },
 ];

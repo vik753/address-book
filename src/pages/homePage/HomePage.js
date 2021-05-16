@@ -2,6 +2,7 @@ import './homePage.scss';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { StateContext } from '../../stateContext/stateContext';
+import { v4 as uuid_v4 } from 'uuid';
 
 export const HomePage = () => {
     const { users, setUsers } = useContext(StateContext);
@@ -74,7 +75,11 @@ export const HomePage = () => {
         <div className="home-wrapper">
             <h1>Phone Book</h1>
             <div className="contacts-wrapper">
-                <div className="add-contact" title="Add new" />
+                <Link
+                  className="add-contact"
+                  title="Add new"
+                  to={`/edit/${uuid_v4()}`}
+                />
                 {contactList}
             </div>
         </div>
