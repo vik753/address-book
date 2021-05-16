@@ -63,12 +63,56 @@
 
       &.phone-row {
         select {
-          padding: 0.5rem;
+          option {
+            margin-bottom: 0.3rem;
+          }
         }
         input {
-          width: 219px;
+          width: 223px;
           margin-left: 12px;
         }
+      }
+    }
+
+    .errorInput {
+      border: 1px solid tomato;
+    }
+  }
+  .all-required {
+    color: tomato;
+    font-weight: bold;
+  }
+
+  .buttons-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+
+    input {
+      min-width: 200px;
+      cursor: pointer;
+    }
+
+    .cancelBtn {
+      font-weight: 600;
+      color: #fff;
+      background: tomato;
+      border: 1px solid tomato;
+
+      &:hover {
+        color: tomato;
+        background: #fff;
+      }
+    }
+
+    .saveBtn {
+      font-weight: 600;
+      color: #fff;
+      background: green;
+
+      &:hover {
+        color: green;
+        background: #fff;
       }
     }
   }

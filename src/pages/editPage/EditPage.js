@@ -8,18 +8,19 @@ import { v4 as uuid_v4 } from 'uuid';
 import _ from 'lodash';
 
 export const EditPage = () => {
-    let history = useHistory();
-    const { users, setUsers } = useContext(StateContext);
-    const [currentUser, setCurrentUser] = useState(null);
     const { id } = useParams();
+    let history = useHistory();
     const userDataEl = useRef(null);
     const removeIco = useRef(null);
+    const { users, setUsers } = useContext(StateContext);
+    const [currentUser, setCurrentUser] = useState(null);
     const [numPhones, setNumPhones] = useState(0);
     const [isNamesValid, setIsNamesValid] = useState({
         first_name: true,
         last_name: true,
     });
     const [isPhonesValid, setIsPhonesValid] = useState({});
+    const [isAllDataValid, setIsAllDataValid] = useState(true);
 
     useEffect(() => {
         if (!id) return;
@@ -64,6 +65,7 @@ export const EditPage = () => {
         e.preventDefault();
         const phoneKey = e.target.id;
         if (!phoneKey) return;
+        isDataValid();
         setCurrentUser((prevData) => ({
             ...prevData,
             phones: {
@@ -95,7 +97,7 @@ export const EditPage = () => {
         e.preventDefault();
         const id = e.target.dataset.id;
         if (!id) return;
-
+        isDataValid();
         setCurrentUser((prevData) => ({
             ...prevData,
             [e.target.id]: e.target.value,
@@ -122,9 +124,7 @@ export const EditPage = () => {
         const { first_name, last_name, phones } = currentUser;
         const isPhonesValid = {};
         Object.entries(phones).map(([key, value]) => {
-            isPhonesValid[key] = validator.isMobilePhone(
-                value.number.replaceAll('-', '')
-            );
+            isPhonesValid[key] = validator.isMobilePhone(value.number.replaceAll('-', ''));
         });
         setIsPhonesValid(isPhonesValid);
         const isPhValid = _.every(isPhonesValid, Boolean);
@@ -135,6 +135,7 @@ export const EditPage = () => {
         };
         setIsNamesValid(isNamesValid);
         const isNamesVal = _.every(isNamesValid, Boolean);
+        setIsAllDataValid(isPhValid && isNamesVal);
         return isPhValid && isNamesVal;
     };
 
@@ -142,20 +143,21 @@ export const EditPage = () => {
         e.preventDefault();
 
         const isValid = isDataValid();
-        console.log('isValid', isValid);
         if (!isValid) {
             return;
         }
 
         if (users.find((user) => user.id === currentUser.id)) {
-            setUsers((prevState) =>
-                prevState.map((user) => {
+            setUsers((prevState) => {
+                const newState = prevState.map((user) => {
                     if (user.id === currentUser.id) {
                         return currentUser;
                     }
                     return user;
-                })
-            );
+                });
+                window.localStorage.setItem('address_contacts', JSON.stringify(newState));
+                return newState;
+            });
         } else {
             setUsers((prevState) => [...prevState, currentUser]);
         }
@@ -192,8 +194,9 @@ export const EditPage = () => {
                         type="text"
                         placeholder="Phone"
                         value={currentUser.phones[phoneKey].number}
-                        onInput={phoneInputHandler}
+                        onChange={phoneInputHandler}
                         required={true}
+                        className={isPhonesValid[phoneKey] ? '' : 'errorInput'}
                     />
                 </div>
             </div>
@@ -204,11 +207,7 @@ export const EditPage = () => {
         <div className="edit-wrapper">
             <h1>Edit Contact</h1>
             <div className="user-data" ref={userDataEl}>
-                <div
-                    className="add-phone"
-                    title="Add new phone"
-                    onClick={addPhoneHandler}
-                />
+                <div className="add-phone" title="Add new phone" onClick={addPhoneHandler} />
                 <div
                     className="remove-phone"
                     title="Remove phone"
@@ -225,7 +224,8 @@ export const EditPage = () => {
                         required={true}
                         value={currentUser ? currentUser.first_name : ''}
                         data-id={currentUser ? currentUser.id : null}
-                        onInput={nameChangeHandler}
+                        onChange={nameChangeHandler}
+                        className={isNamesValid.first_name ? '' : 'errorInput'}
                     />
                 </div>
                 <div className="user-data_row">
@@ -237,17 +237,21 @@ export const EditPage = () => {
                         required={true}
                         value={currentUser ? currentUser.last_name : ''}
                         data-id={currentUser ? currentUser.id : null}
-                        onInput={nameChangeHandler}
+                        onChange={nameChangeHandler}
+                        className={isNamesValid.last_name ? '' : 'errorInput'}
                     />
                 </div>
                 <>
                     {currentUser &&
                         Object.values(currentUser.phones).length &&
-                        Object.keys(currentUser.phones).map((key) =>
-                            getPhoneRow(key)
-                        )}
+                        Object.keys(currentUser.phones).map((key) => getPhoneRow(key))}
                 </>
             </div>
+            {!isAllDataValid && (
+                <p className="all-required">
+                    *All fields are required! Phones must be in correct format.
+                </p>
+            )}
             <div className="buttons-wrapper">
                 <input
                     type="button"
@@ -255,12 +259,7 @@ export const EditPage = () => {
                     className="cancelBtn"
                     onClick={cancelBtnHandler}
                 />
-                <input
-                    type="button"
-                    value="Save"
-                    className="saveBtn"
-                    onClick={saveBtnHandler}
-                />
+                <input type="button" value="Save" className="saveBtn" onClick={saveBtnHandler} />
             </div>
         </div>
     );

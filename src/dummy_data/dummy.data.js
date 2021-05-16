@@ -5,7 +5,7 @@ export const dummyData = [
         last_name: 'Dow',
         phones: {
             'aaa-001': { number: '+380503332233', description: 'mobile' },
-            'aaa-002': { number: '+0482175665', description: 'work' },
+            'aaa-002': { number: '+380503176534', description: 'work' },
         },
     },
     {
