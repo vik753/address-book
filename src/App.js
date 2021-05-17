@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import React, { useState } from 'react';
 
 import { HomePage } from './pages/homePage/HomePage';
@@ -26,6 +26,7 @@ const App = () => {
                             <Route path="/edit/:id">
                                 <EditPage />
                             </Route>
+                            <Redirect to="/" />
                         </Switch>
                     </div>
                     <Footer />
