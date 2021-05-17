@@ -12,6 +12,8 @@ export const EditPage = () => {
     const userDataEl = useRef(null);
     const removeIco = useRef(null);
     const removeIcoSvg = useRef(null);
+    const removePath1 = useRef(null);
+    const removePath2 = useRef(null);
     const { users, setUsers } = useContext(StateContext);
     const [currentUser, setCurrentUser] = useState(null);
     const [numPhones, setNumPhones] = useState(1);
@@ -156,15 +158,21 @@ export const EditPage = () => {
 
         if (users.find((user) => user.id === currentUser.id)) {
             setUsers((prevState) => {
-                return prevState.map((user) => {
+                const newState = prevState.map((user) => {
                     if (user.id === currentUser.id) {
                         return currentUser;
                     }
                     return user;
                 });
+                window.localStorage.setItem('address_book', JSON.stringify(newState));
+                return newState;
             });
         } else {
-            setUsers((prevState) => [...prevState, currentUser]);
+            setUsers((prevState) => {
+                const newState = [...prevState, currentUser];
+                window.localStorage.setItem('address_book', JSON.stringify(newState));
+                return newState;
+            });
         }
 
         history.push('/');
@@ -174,6 +182,8 @@ export const EditPage = () => {
         if (removeIco.current && removeIcoSvg.current) {
             removeIco.current.setAttribute('data-id', phoneKey);
             removeIcoSvg.current.setAttribute('data-id', phoneKey);
+            removePath1.current.setAttribute('data-id', phoneKey);
+            removePath2.current.setAttribute('data-id', phoneKey);
         }
         return (
             <div
@@ -232,8 +242,8 @@ export const EditPage = () => {
                         viewBox="0 0 24 24"
                         fill="tomato"
                     >
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z" />
+                        <path ref={removePath1} d="M0 0h24v24H0V0z" fill="none" />
+                        <path ref={removePath2} d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z" />
                     </svg>
                 </div>
                 <div className="user-data_row">
