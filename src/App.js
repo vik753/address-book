@@ -15,6 +15,7 @@ const App = () => {
 
     return (
         <StateContext.Provider value={{ users, setUsers }}>
+
             <Router>
                 <div className="root-wrapper">
                     <Header />
